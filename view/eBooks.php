@@ -22,18 +22,18 @@
   
   <div class="column left">
     <div class="topnav">
-      <a href="../index.html">Re-Read</a>
-      <a href="libros.html">Libros</a>
-      <a href="eBooks.html">eBooks</a>
+      <a href="../index.php">Re-Read</a>
+      <a href="libros.php">Libros</a>
+      <a href="eBooks.php">eBooks</a>
     </div>
     <h3>Toda la actualidad en eBook</h3>
-     <!---eBooks con descripcion-->
+    <!---eBooks con descripcion-->
      <div class="ebook">
       <a href="https://www.casadellibro.com/libro-cell/9788483465219/1162268"><img src="../img/ebook1.jpeg" alt="eBook 1">
       <div>A través de los teléfonos móviles se envía un mensaje que convierte a todos en esclavos asesinos...</div>
       </a>
     </div>
-    <div class="ebook">
+    <!-- <div class="ebook">
       <a href="https://www.casadellibro.com/libro-el-ciclo-del-hombre-lobo/9788499081281/1819674"><img src="../img/ebook2.jpeg" alt="eBook 2">
       <div>Una escalofriante revisión del mito del hombre lobo por el rey de la literatura de terror...</div>
       </a>
@@ -47,8 +47,29 @@
       <a href="https://www.casadellibro.com/libro-doctor-sueno/9788401354809/2196951"><img src="../img/ebook4.jpeg" alt="eBook 3">
       <div>Una novela que entusiasmará a los millones de lectores de El resplandor y que encantará...</div>
       </a>
-    </div>
+    </div> -->
   </div>
+
+  <?php
+  // conexiona la base de datos
+  include '../services/connection.php';
+
+  // seleccion y muestra de datos de la base de datos
+  $result = mysqli_query($conn, "SELECT Books.Description, Books.img, Books.Title FROM Books WHERE eBook !='0'");
+
+  if (!empty($result) && mysqli_num_rows($result) > 0) {
+    // datos de salida de cada fila (fila = row)
+    while ($row = mysqli_fetch_array($result)) {
+      echo "<div class='ebook'>";
+      // añadimos la imagen a la pagina con la etiqueta img de html
+      echo "<img src=../img/".$row['img']." alt='".$row['Title']."'>";
+      // añadimos el titulo a la pagina con la etiqueta h2 de html 
+      // echo "<div class='desc'".$row['Title']."</div>;
+      echo "</div>";
+    }
+  }
+
+  ?>
   
   <div class="column right">
     <h2>Side</h2>
