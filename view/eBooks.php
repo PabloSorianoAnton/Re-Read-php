@@ -31,8 +31,8 @@
             <label for="fautor">Autor</label>
             <input type="text" id="fautor" name="fautor" placeholder="Introduzca el autor...">
 
-            <!-- <label for="country">Country</label>
-            <input type="text" id="lname" name="lastname" placeholder="Your last name.."> -->
+            <label for="titulo">Título</label>
+            <input type="text" id="titulo" name="titulo" placeholder="Introduzca el título...">
 
             <label for="country">País</label>
             <select id="country" name="country">
@@ -59,7 +59,8 @@
             FROM Books INNER JOIN BooksAuthors ON Id=BooksAuthors.BookId 
             Inner Join Authors ON Authors.Id=BooksAuthors.AuthorId 
             WHERE Authors.Name LIKE '%{$_POST['fautor']}%'
-            AND Authors.Country LIKE '%{$_POST['country']}%'";
+            AND Authors.Country LIKE '%{$_POST['country']}%'
+            AND Books.Title LIKE '%{$_POST['titulo']}%'";
             $result = mysqli_query($conn, $query);       
           }else{
             // mostrara todos los ebooks de la BD
